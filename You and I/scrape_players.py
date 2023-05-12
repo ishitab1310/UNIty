@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import re
 
 def scrape_player_data(url):
     response = requests.get(url)
@@ -7,22 +8,29 @@ def scrape_player_data(url):
 
     # Extract player information from the individual page
     name = soup.find("h1", class_="firstHeading").text.strip()
+    description = soup.find("div", class_="mw-parser-output").p.text.strip()
 
-    # Extract other relevant information based on the HTML structure of the individual page
-    description = ""
-    ranking = 0
-    achievements = ""
-    coach = ""
-    birthdate = ""
+    player_info_table = soup.find("table", class_="infobox vcard")
+    rows = player_info_table.find_all("tr")
+
+    data = {}
+    for row in rows:
+        header = row.find("th")
+        if header:
+            field = header.text.strip()
+            if field.endswith(":"):
+                field = field[:-1]
+
+            value = row.find("td")
+            if value:
+                value = value.text.strip()
+                data[field] = value
 
     # Update the extracted player data into a dictionary
     player = {
         "name": name,
         "description": description,
-        "ranking": ranking,
-        "achievements": achievements,
-        "coach": coach,
-        "birthdate": birthdate
+        "data": data
     }
 
     return player
@@ -50,5 +58,5 @@ def scrape_players():
 
 if __name__ == '__main__':
     player_data = scrape_players()
-    # Save the player_data or insert into the database
-    # ...
+    for player in player_data:
+        print(player)
