@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Beats | Spotlight</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .text {
+            padding-left: 100px;
+            padding-right: 100px;
+            font-size: 20px;
+            color: rgb(195, 195, 195);
+            font-family: 'Courier New', Courier, monospace
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        .econtainer {
+            max-width: 750px;
+            height: 500px;
+            margin: 25px auto;
+            background-color: rgb(60,100,140);
+            border-color: red;
+            border-radius: 10px;
+            box-shadow: 4 2px 5px rgba(100, 0, 0, 1);
+            padding: 20px;
+            display: none;
+            background: linear-gradient(rgb(10,10,10),rgb(54,85,115));
+            background-size: 100% 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        .item {
+            margin: 25px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            padding-top: 15px;
+            padding-bottom: 0px;
+            margin-left: 50px;
+            margin-right: 50px;
+            margin-bottom: 0px;
+            border-radius: 25px;
+            background-color: rgb(0, 0, 0);
+            cursor: pointer;
+        }
+
+        input[type="text"],
+        input[type="submit"] {
+            width: 200px;
+            height: 20px;
+        }
+
+        select[id="artist-select"] {
+            width: 120px;
+            height: 30px;
+        }
+
+        .image-container img {
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .heading {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+
+        th {
+            background-color: rgba(0, 0, 0, 0.75);
+            font-size: 135%;
+            font-family: "Lucida Console", "Courier New", monospace;
+            text-align: center;
+            color: white;
+            padding-top: 1.25%;
+            padding-bottom: 1.25%;
+            padding-left: 100px;
+            padding-right: 50px;
+        }
+
+        td {
+            font-size: 115%;
+            font-family: "Lucida Console", "Courier New", monospace;
+            text-align: center;
+            color: rgb(198, 198, 198);
+            padding-top: 1.25%;
+            padding-bottom: 1.25%;
+            padding-left: 100px;
+            padding-right: 50px;
+
+        }
+
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 100px;
+            top: 330px;
+            font-size: 40px;
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+
+        .footer {
+            margin-top: 50px;
+        }
+
+        .bottom-middle {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+            top: 158px;
+            font-size: 20px;
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+        }
+
+        #grad1 {
+            height: 195px;
+            background-color: black;
+            background-image: linear-gradient(to bottom, rgba(104,158,203,0.7), rgb(0, 0, 0, 0));
+            z-index: 100;
+            float: top;
+        }
+
+        input[type="radio"] {
+            -webkit-appearance: none;
+            /* Remove default appearance */
+            -moz-appearance: none;
+            appearance: none;
+            border: 2px solid #ccc;
+            /* Add border for the button shape */
+            border-radius: 50%;
+            /* Make the border circular */
+            width: 20px;
+            /* Set the width and height of the button */
+            height: 20px;
+        }
+
+        input[type="radio"]:checked {
+            background-color: #ccc;
+            /* Add background color when selected */
+        }
+
+        .countdown_description {
+            padding-top: 10px;
+            color: #ffffff"
+
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(195, 195, 195);
+        }
+
+        .table {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace;
+            color: rgb(195, 195, 195);
+        }
+        .start-button {
+            background-color: rgb(104,158,203);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .input-container input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+            height:22.5px
+            margin-right:10px;
+        }
+
+        .input-container input[type="submit"] {
+            background-color: rgb(104,158,203);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            height:38px;
+            width:71px;
+            margin-left: 10px;
+        }
+
+       
+        .chat-log {
+            height: 410px;
+            overflow-y: scroll;
+            border: 2px solid black;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        .bot-message {
+            background-color: #d4e6f1;
+            border-radius: 5px;
+            padding: 8px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .bot-message:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -8px;
+            border-style: solid;
+            border-width: 8px 8px 8px 0;
+            border-color: transparent #d4e6f1 transparent transparent;
+            transform: translateY(-50%);
+        }
+
+        .bot-typing {
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .bot-typing span {
+            display: inline-block;
+            margin-left: 5px;
+            animation: typing 1s infinite;
+        }
+
+        @keyframes typing {
+            0% { opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(0,0,0);">
+    <div id="grad1">
+
+
+
+    
+        <br><br>
+        <h1 ALIGN="center" style="color:rgb(210, 210, 210);">
+            <b><big><big><big><big><big>Welcome to Chatbot!</big></big></big></big></big></b>
+        </h1>
+   
+
+        <div class="image-container" id="welcome-container">
+    <div class="container">
+
+            <img class="item item-2" src="https://cdn.technologyadvice.com/wp-content/uploads/2018/02/friendly-chatbot.jpg" style="border-radius:50%;width:350px; padding-bottom: 30px;"
+                ALIGN="left" id="taylor"></img>
+        
+        <div class="text">
+            <h1 ALIGN="center"><b>I AM CHATTY</b></h1>
+            <p><center>Click the button below to start the conversation.</center></p>
+            <center><button class="start-button" onclick="startChat()">Start Chat</button></center>
+            <br><br>
+            <p ALIGN="center">
+                <i ALIGN="center">This chatbot serves as an interactive tool for users to inquire about and receive information on the top 10 Indian players. It leverages a rule-based approach to provide predefined responses based on user input and displays the information in a visually appealing manner.</i>
+            </p>
+        </div>
+        </div>
+    
+
+   
+    <br>
+
+
+    <div class="footer">
+        <p ALIGN="center" style="color: #ffffff; font-size: large;">
+            Copyright © 2023 Chatty. All rights reserved.
+        </p>
+    </div>
+</div>
+<br>
+<div class="econtainer" id="chat-container">
+    <div class="chat-log" id="chat-log"></div>
+    <div class="input-container">
+        <input type="text" id="user-input" placeholder="Type your message here" onkeypress="handleKeyPress(event)">
+        <input type="submit" value="Send" onclick="sendMessage()">
+    </div>
+</div>
+
+       <script>
+
+        function displayUserMessage(message) {
+            var chatLog = document.getElementById("chat-log");
+            var userMessage = document.createElement("div");
+            userMessage.classList.add("user-message");
+            userMessage.textContent = message;
+            chatLog.appendChild(userMessage);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+      
+        function displayBotMessage(message) {
+            var chatLog = document.getElementById("chat-log");
+            var botTyping = document.querySelector(".bot-typing");
+            if (botTyping) {
+                chatLog.removeChild(botTyping);
+            }
+            var botMessage = document.createElement("div");
+            botMessage.classList.add("bot-message");
+            botMessage.textContent = message;
+            chatLog.appendChild(botMessage);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+       
+        function displayBotTyping() {
+            var chatLog = document.getElementById("chat-log");
+            var botTyping = document.createElement("div");
+            botTyping.classList.add("bot-typing");
+            botTyping.innerHTML = '<span></span><span></span><span></span>';
+            chatLog.appendChild(botTyping);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        function handleKeyPress(event) {
+            if (event.keyCode === 13) { 
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            var userInput = document.getElementById("user-input");
+            var userMessage = userInput.value.trim();
+            if (userMessage !== "") {
+                displayUserMessage(userMessage);
+                userInput.value = "";
+                displayBotTyping();
+
+               
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/process_input", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                        var botResponse = xhr.responseText;
+                        displayBotMessage(botResponse);
+                    }
+                };
+                xhr.send("input_text=" + encodeURIComponent(userMessage));
+            }
+        }
+
+        function startChat() {
+            var welcomeContainer = document.getElementById("welcome-container");
+            var chatContainer = document.getElementById("chat-container");
+            welcomeContainer.style.display = "none";
+            chatContainer.style.display = "block";
+        }
+    </script>
+
+</body>
+
+</html>
